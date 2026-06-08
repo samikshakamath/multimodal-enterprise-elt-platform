@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+
+bronze/
+silver/
+gold/
+data/
+
+.env
+
+.ipynb_checkpoints/
+.DS_Store
