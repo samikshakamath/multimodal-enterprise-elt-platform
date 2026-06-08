@@ -2,9 +2,9 @@
 
 ## Overview
 
-The Multimodal Enterprise ELT Platform is an end-to-end data engineering solution designed to process multiple enterprise data modalities including logs, customer support transcripts, documents, and images.
+Built a multimodal ELT platform that processes logs, customer support transcripts, documents, and images through a Medallion Architecture (Bronze → Silver → Gold).
 
-The platform implements a Medallion Architecture (Bronze-Silver-Gold) using PySpark and provides automated data quality validation, orchestration, containerization, and CI/CD capabilities.
+The platform combines FastAPI, PySpark, Docker, GitHub Actions, and Power BI to automate ingestion, transformation, validation, orchestration, and analytics generation across multiple data modalities.
 
 ---
 
@@ -12,74 +12,68 @@ The platform implements a Medallion Architecture (Bronze-Silver-Gold) using PySp
 
 ```text
 FastAPI
-   ↓
-File Classification
-   ↓
-
-┌────────────┬────────────┬────────────┬────────────┐
-│   Logs     │ Transcripts│ Documents  │   Images   │
-└────────────┴────────────┴────────────┴────────────┘
-
-       ↓
-     Bronze
-
-       ↓
-     Silver
-
-       ↓
- Data Validation
-
-       ↓
-      Gold
-
-       ↓
-    Power BI
+    │
+    ▼
+Classification Layer
+    │
+    ├── Logs
+    ├── Transcripts
+    ├── Documents
+    └── Images
+            │
+            ▼
+        Bronze
+            │
+            ▼
+        Silver
+            │
+            ▼
+    Quality Checks
+            │
+            ▼
+         Gold
+            │
+            ▼
+        Power BI
 ```
 
 ---
 
-## Features
+## Tech Stack
+
+| Layer            | Technologies           |
+| ---------------- | ---------------------- |
+| API              | FastAPI                |
+| Data Processing  | Python, Pandas         |
+| Data Engineering | PySpark                |
+| Data Quality     | Great Expectations     |
+| Orchestration    | Python                 |
+| DevOps           | Docker, GitHub Actions |
+| Visualization    | Power BI               |
+
+---
+
+## Key Features
 
 * Multimodal data processing
-* Medallion Architecture (Bronze-Silver-Gold)
-* PySpark transformations
-* Data quality validation
-* FastAPI ingestion service
-* Docker containerization
-* GitHub Actions CI/CD
+* Bronze–Silver–Gold architecture
+* PySpark transformation pipelines
+* Automated data quality validation
+* Dockerized deployment
+* CI/CD with GitHub Actions
 * Automated orchestration layer
+* Power BI analytics reporting
 
 ---
 
-## Technologies
+## Supported Data Modalities
 
-* Python
-* FastAPI
-* PySpark
-* Pandas
-* Docker
-* GitHub Actions
-* Power BI
-
----
-
-## Data Sources
-
-### Logs
-
-Enterprise log datasets
-
-### Customer Support Transcripts
-
-Twitter Customer Care Dataset
-
-### Documents
-
-RVL-CDIP Sample Dataset
-
-### Images
-
-Intel Image Classification Dataset
+| Modality    | Output                     |
+| ----------- | -------------------------- |
+| Logs        | Event-level analytics      |
+| Transcripts | Customer-support analytics |
+| Documents   | Document-type analytics    |
+| Images      | Image-category analytics   |
 
 ---
 
@@ -88,30 +82,25 @@ Intel Image Classification Dataset
 ```text
 app/
 src/
- ├── processing/
- ├── transformations/
- ├── quality/
- └── orchestration/
-
-data/
+├── classification/
+├── ingestion/
+├── processing/
+├── transformations/
+├── quality/
+└── orchestration/
 
 Dockerfile
 requirements.txt
-README.md
 ```
 
 ---
 
-## Running the Application
-
-### Docker
+## Run Locally
 
 ```bash
 docker build -t multimodal-elt .
 docker run -p 8000:8000 multimodal-elt
 ```
-
-### Orchestration
 
 ```bash
 python src/orchestration/run_pipeline.py
@@ -121,22 +110,13 @@ python src/orchestration/run_pipeline.py
 
 ## CI/CD
 
-GitHub Actions automatically validates:
+GitHub Actions validates:
 
-* Repository structure
 * FastAPI application
-* Processing scripts
+* Processing pipelines
 * Transformation scripts
-* Data quality scripts
-
----
-
-## Future Enhancements
-
-* Cloud deployment
-* Real-time ingestion
-* Automated dashboard refresh
-* OCR-based document extraction
+* Data quality modules
+* Repository structure
 
 ```
 ```
