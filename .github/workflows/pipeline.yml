@@ -33,9 +33,8 @@ jobs:
 
       - name: Validate Project Structure
         run: |
-          test -d bronze
-          test -d silver
-          test -d gold
+          test -d app
+          test -d src
 
       - name: Verify FastAPI App
         run: |
@@ -43,4 +42,21 @@ jobs:
 
       - name: Verify Processing Scripts
         run: |
-          find src -name "*.py" -exec python -m py_compile {} \;
+          python -m py_compile src/classification/classifier.py
+          python -m py_compile src/ingestion/storage.py
+          python -m py_compile src/processing/document_processor.py
+          python -m py_compile src/processing/image_processor.py
+          python -m py_compile src/processing/log_processor.py
+          python -m py_compile src/processing/transcript_processor.py
+          python -m py_compile src/quality/validate_documents.py
+          python -m py_compile src/quality/validate_images.py
+          python -m py_compile src/quality/validate_logs.py
+          python -m py_compile src/quality/validate_transcripts.py
+          python -m py_compile src/transformations/bronze_to_silver.py
+          python -m py_compile src/transformations/document_bronze_to_silver.py
+          python -m py_compile src/transformations/document_silver_to_gold.py
+          python -m py_compile src/transformations/image_bronze_to_silver.py
+          python -m py_compile src/transformations/image_silver_to_gold.py
+          python -m py_compile src/transformations/silver_to_gold.py
+          python -m py_compile src/transformations/transcript_bronze_to_silver.py
+          python -m py_compile src/transformations/transcript_silver_to_gold.py
